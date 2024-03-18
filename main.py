@@ -1,8 +1,10 @@
 import urllib.request
 from bs4 import BeautifulSoup
 import re
-import openpyxl
+import ssl
 
+# 忽略對SSL證書的驗證
+ssl._create_default_https_context = ssl._create_unverified_context
 webUrl=urllib.request.urlopen("https://barrie.ca")
 html=webUrl.read()
 
