@@ -1,23 +1,44 @@
-import urllib.request
-from bs4 import BeautifulSoup
-import re
-import ssl
+from docx import Document
 
-# 忽略對SSL證書的驗證
-ssl._create_default_https_context = ssl._create_unverified_context
-webUrl=urllib.request.urlopen("https://barrie.ca")
-html=webUrl.read()
+'''
+Target List
+'''
+dueDateList = [
+    "Deadline", "Hand in",
+    "Submission", "Turn in",
+    "D-day", "Deliverable",
+    "Task Date"
+]
 
-soup=BeautifulSoup(html,"html.parser")
-displayedText=soup.get_text()
-listOfText=displayedText.split()
-for word in listOfText:
-    digits='0123456789'
-    count=0
-    for i in range (len(word)):
-        if word[i] in digits:
-            count=count+1
-    if count==10:
-        print(word)
-    else:
-        pass
+gradesList = [
+    "Grades", "Marks",
+    "Score", "Percentage", "Weightage",
+    "Evaluation", "Performance"
+]
+
+assignmentsList = [
+    "Assignment", "Homework",
+    "Project", "Task", "Exercise",
+    "Problem Set", "Report"
+]
+
+examsList = [
+    "Exam", "Quiz",
+    "Test", "Mid-term",
+    "Final", "Assessment"
+]
+
+
+
+docxFilePath = r"C:\Users\wilso\Desktop\Syllabus - Winter 2024 - Relational Databases.docx"
+
+doc = Document(docxFilePath)
+
+table = doc.tables[0]
+
+for paragraph in doc.paragraphs:
+    print(paragraph.text)
+
+for row in table.rows:
+    for cell in row.cells:
+        print(cell.text)
