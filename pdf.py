@@ -65,22 +65,7 @@ for pageNum, page in enumerate(pdfReader.pages):
 
 pdfFileObj.close()
 
-'''
-print(len(pdfReader.pages))
-page0Obj = pdfReader.pages[0]
-page0Text = page0Obj.extract_text()
-page1Obj = pdfReader.pages[1]
-page1Text = page1Obj.extract_text()
-page2Obj = pdfReader.pages[2]
-page2Text = page2Obj.extract_text()
-page3Obj = pdfReader.pages[3]
-page3Text = page3Obj.extract_text()
 
-print(page0Text)
-print(page1Text)
-print(page2Text)
-print(page3Text)
-'''
 '''
 1. get pdf info
 2. 從捕捉到第一個week開始 往後確認所有的week assignment %
