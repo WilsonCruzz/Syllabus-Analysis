@@ -1,5 +1,5 @@
 import PyPDF2
-
+from docx import Document
 '''
 Target List
 '''
@@ -64,6 +64,11 @@ for pageNum, page in enumerate(pdfReader.pages):
             print(target, context)
 
 pdfFileObj.close()
+
+
+
+
+finalList = []
 
 
 '''

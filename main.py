@@ -42,3 +42,10 @@ for paragraph in doc.paragraphs:
 for row in table.rows:
     for cell in row.cells:
         print(cell.text)
+
+finalList=[]
+
+doc = Document()
+table = doc.add_table(rows=15, columns=1)
+for i in range(len(finalList)):
+    table.cell(i,0).text = finalList[i]
