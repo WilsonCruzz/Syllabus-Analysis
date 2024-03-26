@@ -1,5 +1,6 @@
 import PyPDF2
 from docx import Document
+
 '''
 Target List
 '''
@@ -38,37 +39,44 @@ tableContentList = []
 
 targetList = dueDateList + gradesList + assignmentsList + examsList
 catchList = []
+
+
 # pdf
-pdfFileObj = open(r"C:\Users\wilso\Desktop\Syllabus-COMP1054-2024W.pdf", 'rb')
-pdfReader = PyPDF2.PdfReader(pdfFileObj)
+def processPdfFile(filePath):
+    pdfFileObj = open(filePath, 'rb')
+    pdfReader = PyPDF2.PdfReader(pdfFileObj)
 
-numContextWords = 10
-pagesWithKeywords = {}
+    numContextWords = 10
+    pagesWithKeywords = {}
 
-for pageNum, page in enumerate(pdfReader.pages):
-    pageText = page.extract_text()
-    words = pageText.split()
-    for target in targetList:
-        if target in words:
-            targetIndex = words.index(target)
+    for pageNum, page in enumerate(pdfReader.pages):
+        pageText = page.extract_text()
+        words = pageText.split()
+        for target in targetList:
+            if target in words:
+                targetIndex = words.index(target)
 
-            startIndex = max(0, targetIndex - numContextWords)
-            endIndex = min(len(words), targetIndex + numContextWords + 1)
-            context = ''
-            for i in range(startIndex, endIndex):
-                context += words[i] + ' '
-            if pageNum in pagesWithKeywords:
-                pagesWithKeywords[pageNum].append((target, context))
-            else:
-                pagesWithKeywords[pageNum] = [(target, context)]
-            print(target, context)
+                startIndex = max(0, targetIndex - numContextWords)
+                endIndex = min(len(words), targetIndex + numContextWords + 1)
+                context = ''
+                for i in range(startIndex, endIndex):
+                    context += words[i] + ' '
+                if pageNum in pagesWithKeywords:
+                    pagesWithKeywords[pageNum].append((target, context))
+                else:
+                    pagesWithKeywords[pageNum] = [(target, context)]
+                print(target, context)
 
-pdfFileObj.close()
-
-
+    pdfFileObj.close()
 
 
 finalList = []
+
+
+
+
+
+
 
 
 '''
