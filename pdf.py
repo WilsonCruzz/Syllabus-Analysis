@@ -1,46 +1,8 @@
 import PyPDF2
 from docx import Document
-
-'''
-Target List
-'''
-
-dueDateList = [
-    "deadline", "hand in",
-    "submission", "turn in",
-    "d-day", "deliverable",
-    "task date"
-]
-
-gradesList = [
-    "grades", "marks",
-    "score", "percentage", "weightage",
-    "evaluation", "performance"
-]
-
-assignmentsList = [
-    "assignment 1", "assignment 2", "homework",
-    "project", "task", "exercise",
-    "problem set", "report"
-]
-
-examsList = [
-    "exam", "quiz",
-    "test", "mid-term",
-    "final", "assessment", 'test 1', 'test 2', 'test 3', 'test 4', 'test 5'
-]
-
-'''
-weekList
-'''
-weekList = ['week 1', 'week 2', 'week 3', 'week 4', 'week 5', 'week 6',
-            'week 7', 'study week', 'week 8', 'week 9', 'week 10',
-            'week 11', 'week 12', 'week 13', 'week 14', 'week']
-
+import targetList
 
 tableContentList = []
-
-targetList = dueDateList + gradesList + assignmentsList + examsList
 catchList = []
 
 
@@ -56,7 +18,7 @@ def processPdfFile(filePath):
     for pageNum, page in enumerate(pdfReader.pages):
         pageText = page.extract_text()
         words = pageText.split()
-        for target in targetList:
+        for target in keyword.targetList:
             if target in words:
                 targetIndex = words.index(target)
 
