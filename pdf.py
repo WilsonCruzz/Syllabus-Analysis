@@ -6,35 +6,38 @@ Target List
 '''
 
 dueDateList = [
-    "Deadline", "Hand in",
-    "Submission", "Turn in",
-    "D-day", "Deliverable",
-    "Task Date"
+    "deadline", "hand in",
+    "submission", "turn in",
+    "d-day", "deliverable",
+    "task date"
 ]
 
 gradesList = [
-    "Grades", "Marks",
-    "Score", "Percentage", "Weightage",
-    "Evaluation", "Performance"
+    "grades", "marks",
+    "score", "percentage", "weightage",
+    "evaluation", "performance"
 ]
 
 assignmentsList = [
-    "Assignment", "Homework",
-    "Project", "Task", "Exercise",
-    "Problem Set", "Report"
+    "assignment 1", "assignment 2", "homework",
+    "project", "task", "exercise",
+    "problem set", "report"
 ]
 
 examsList = [
-    "Exam", "Quiz",
-    "Test", "Mid-term",
-    "Final", "Assessment"
+    "exam", "quiz",
+    "test", "mid-term",
+    "final", "assessment", 'test 1', 'test 2', 'test 3', 'test 4', 'test 5'
 ]
+
 '''
 weekList
 '''
-weekList = ['week1', 'week2', 'week3', 'week4', 'week5', 'week6',
-            'week7', 'study week', 'week8', 'week9', 'week10',
-            'week11', 'week12', 'week13', 'week14']
+weekList = ['week 1', 'week 2', 'week 3', 'week 4', 'week 5', 'week 6',
+            'week 7', 'study week', 'week 8', 'week 9', 'week 10',
+            'week 11', 'week 12', 'week 13', 'week 14', 'week']
+
+
 tableContentList = []
 
 targetList = dueDateList + gradesList + assignmentsList + examsList
@@ -43,6 +46,7 @@ catchList = []
 
 # pdf
 def processPdfFile(filePath):
+    #open file
     pdfFileObj = open(filePath, 'rb')
     pdfReader = PyPDF2.PdfReader(pdfFileObj)
 
@@ -68,7 +72,6 @@ def processPdfFile(filePath):
                 print(target, context)
 
     pdfFileObj.close()
-
 
 finalList = []
 
