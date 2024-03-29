@@ -93,6 +93,7 @@ def targetWordsChecker(listOne):
             words = listOne[i][j].split()
 
             # Filter out words that are not in the targetList.
+            # ref: https://www.w3schools.com/python/python_lists_comprehension.asp
             modifiedWords = [word for word in words if word.lower() in targetList.targetList]
 
             # Join the modified words back into a string and append to the modifiedSublist.
@@ -112,6 +113,7 @@ def concatList(listOne):
     # Iterate through each sublist in the input list.
     for i in range(len(listOne)):
         # Join the elements of the current sublist into a single string and append to result.
+        # ref:https://www.w3schools.com/python/ref_string_join.asp
         result.append(''.join(listOne[i]))
 
     # Return the list containing concatenated strings.
