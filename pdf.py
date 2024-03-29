@@ -1,11 +1,19 @@
 import PyPDF2
-from docx import Document
+from forDocxFile import Document
 import targetList
 
 tableContentList = []
 catchList = []
 
 
+'''
+1. get pdf info
+2. 從捕捉到第一個week開始 往後確認所有的week assignment %
+3. 如果都有就把他整個段落變成新obj
+4. 以y座標為基準分組
+5. key value配對
+6. output 到table
+'''
 # pdf
 def processPdfFile(filePath):
     #open file
@@ -38,17 +46,3 @@ def processPdfFile(filePath):
 finalList = []
 
 
-
-
-
-
-
-
-'''
-1. get pdf info
-2. 從捕捉到第一個week開始 往後確認所有的week assignment %
-3. 如果都有就把他整個段落變成新obj
-4. 以y座標為基準分組
-5. key value配對
-6. output 到table
-'''

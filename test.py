@@ -1,6 +1,6 @@
 import PyPDF2
 import re
-import pdf
+import targetList
 
 def weekFinder(filePath):
     pdfFileObj = open(filePath, 'rb')
@@ -13,7 +13,7 @@ def weekFinder(filePath):
         words = re.findall(r'\b[^\W\d_]+ \d+\b', text)  # 使用正则表达式将文本按单词分割
 
         for index, word in enumerate(words):
-            if word.lower() in pdf.weekList:
+            if word.lower() in targetList.weekList:
                 print(word)
                 relatedText = words[max(0, index - 1): min(len(words), index + 1)]  # 提取单词周围的相关文本
                 relatedList.append({
@@ -22,14 +22,14 @@ def weekFinder(filePath):
     pdfFileObj.close()
     return relatedList
 
-if __name__ == "__main__":
+'''
     pdf_file = r"C:\Users\wilso\Desktop\syllabus\Syllabus - Winter 2024 - Relational Databases.pdf"  # 替换为你的PDF文件路径
 
 
     results = weekFinder(pdf_file)
     for result in results:
         print(result)
-        '''
+        
         for text in result['relatedText']:
             if text.lower() in keyword.targetList:
                 print(result['relatedText'],result['y'])
