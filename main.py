@@ -20,16 +20,16 @@ bgLabel = tk.Label(root, image=bgImage)
 bgLabel.place(x=0, y=0, relwidth=1, relheight=1.5)
 
 # message
-labelInfo1 = tk.Label(root, text="Welcome to Syllabus-Analysis.", font=("Arial", 22))
-labelInfo1.pack(pady=25)
+greeting = tk.Label(root, text="Welcome to Syllabus-Analysis.", font=("Arial", 22))
+greeting.pack(pady=25)
 
-labelInfo2 = tk.Label(root, text="This program analyzes Microsoft Word syllabus files\n "
+content = tk.Label(root, text="This program analyzes Microsoft Word syllabus files\n "
                                  "and generates weekly schedules for students.", font=("Arial", 16))
-labelInfo2.pack(pady=15)
+content.pack(pady=15)
 
-labelInfo3 = tk.Label(root, text="Please click the button below to select "
+instruction = tk.Label(root, text="Please click the button below to select "
                                  "the Word file for analysis.", font=("Arial", 14))
-labelInfo3.pack(pady=20)
+instruction.pack(pady=20)
 
 
 def main(docxFilePath):
