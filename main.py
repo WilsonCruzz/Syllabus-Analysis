@@ -57,11 +57,13 @@ def show():
     main(filePath)
 
 
-# Create a button widget with the text "Open" and the command to call the show function.
-btn = tk.Button(root, text="Click me", command=show)
 
-# Pack the button widget onto the Tkinter root window.
-btn.pack()
+if __name__ == "__main__":
+    # Create a button widget with the text "Open" and the command to call the show function.
+    btn = tk.Button(root, text="Click me", command=show)
 
-# Keep running the Tkinter main event loop to display the GUI and handle events.
-root.mainloop()
+    # Pack the button widget onto the Tkinter root window.
+    btn.pack()
+
+    # Keep running the Tkinter main event loop to display the GUI and handle events.
+    root.mainloop()
