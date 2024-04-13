@@ -35,7 +35,7 @@ Welcome to the Syllabus-Analysis project! This program is designed to analyze Mi
 
 ## Example
 
-![Example](example.png)
+![Example](static/example.png)
 
 ## Contributors
 

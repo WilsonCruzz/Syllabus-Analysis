@@ -1,4 +1,4 @@
-import forDocxFile
+from function import forDocxFile
 import tkinter as tk
 from tkinter import filedialog
 
@@ -15,7 +15,7 @@ root.minsize(600, 600)
 root.resizable(True, True)
 
 # Georgian college logo
-bgImage = tk.PhotoImage(file="georgianc.png")
+bgImage = tk.PhotoImage(file="static/georgianc.png")
 bgLabel = tk.Label(root, image=bgImage)
 bgLabel.place(x=0, y=0, relwidth=1, relheight=1.5)
 

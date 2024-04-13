@@ -1,5 +1,5 @@
 from docx import Document
-import targetList
+from data import targetList
 
 '''
 Step1: 

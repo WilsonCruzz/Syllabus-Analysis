@@ -1,6 +1,4 @@
 import PyPDF2
-from forDocxFile import Document
-import targetList
 
 tableContentList = []
 catchList = []

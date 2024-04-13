@@ -1,6 +1,7 @@
 import PyPDF2
 import re
-import targetList
+from data import targetList
+
 
 def weekFinder(filePath):
     pdfFileObj = open(filePath, 'rb')
