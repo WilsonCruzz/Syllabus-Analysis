@@ -3,19 +3,40 @@ from constants import targetList
 
 '''
 Step1: 
-Using two functions to return a nested list with a length of 15.
+Using 3 functions to return a nested list with a length of 15.
 
-The first function iterates through all the tables in the document file. 
-Once it finds "week" in a cell, it stores the contents of the same row in list format. 
-Finally, it stores everything into a nested list and returns it.
+findWeekInRow(row): This function iterates through all cells in a table row. Once it finds "week" in a cell, it stores 
+the contents of the same row in list format and returns it. 
 
-The second function removes duplicate lists and ensures that the first sublist begins with "week 1". 
+tableInfoExtract(docxFilePath): This function iterates through all tables in the document. For each row in each table, 
+it calls the findWeekInRow(row) function to get related text. Finally, it stores all related text into a nested list 
+and returns it.
+
+dupCheck(listOne): This function removes duplicate lists and ensures that the first sublist begins with "week 1". 
 It returns a nested list sorted by week, with a length of 15.
 
-return[['Week 1',' '], ['Week 2',' ']]
+return[['Week 1',' '], ['Week 2',' ']....['Week 15',' ']]
 '''
+def weekFinder(row):
+    allRelatedText = []
+    # Iterate through each cell in the row.
+    for cell in row.cells:
+        # Check if the text in the cell contains 'week' (case insensitive).
+        if 'week' in cell.text.lower():
+            # Initialize an empty list to store related text in the current row.
+            relatedText = []
 
-def weekFinder(docxFilePath):
+            # Iterate through each cell in the row again to collect related text.
+            for cellInRow in row.cells:
+                # Append the stripped text of each cell to the relatedText list.
+                relatedText.append(cellInRow.text.strip())
+
+            # Append the relatedText list of the current row to the allRelatedText list.
+            allRelatedText.append(relatedText)
+
+    return allRelatedText
+
+def tableInfoExtract(docxFilePath):
     # Open the specified Word document file.
     doc = Document(docxFilePath)
 
@@ -26,20 +47,8 @@ def weekFinder(docxFilePath):
     for table in doc.tables:
         # Iterate through each row in the table.
         for row in table.rows:
-            # Iterate through each cell in the row.
-            for cell in row.cells:
-                # Check if the text in the cell contains 'week' (case insensitive).
-                if 'week' in cell.text.lower():
-                    # Initialize an empty list to store related text in the current row.
-                    relatedText = []
-
-                    # Iterate through each cell in the row again to collect related text.
-                    for cellInRow in row.cells:
-                        # Append the stripped text of each cell to the relatedText list.
-                        relatedText.append(cellInRow.text.strip())
-
-                    # Append the relatedText list of the current row to the allRelatedText list.
-                    allRelatedText.append(relatedText)
+            # Call the weekFinder function to get related text from the current row.
+            allRelatedText += weekFinder(row)
 
     # Return the list containing related text from all rows.
     return allRelatedText

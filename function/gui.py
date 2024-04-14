@@ -67,7 +67,7 @@ def processDocxFile(docxFilePath):
     # Set the output path for the processed file
     outputPath = filedialog.asksaveasfilename(defaultextension=".docx")
     # Set the list of functions to be applied to the input data
-    functionsList = [forDocxFile.weekFinder, forDocxFile.dupCheck,
+    functionsList = [forDocxFile.tableInfoExtract, forDocxFile.dupCheck,
                      forDocxFile.targetWordsChecker, forDocxFile.concatList,
                      # ref.https://www.w3schools.com/python/python_lambda.asp
                      lambda x: forDocxFile.insertToTable(x, outputPath)]
