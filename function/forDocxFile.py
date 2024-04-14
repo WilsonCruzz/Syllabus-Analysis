@@ -123,9 +123,9 @@ Inserting a list of length fifteen into the second column of a table, starting f
 in a docx file, and saving it as a new file.
 '''
 
-def insertTable(listOne):
-    # Open the specified Word document file.
-    doc = Document(r"C:\Users\wilso\Desktop\SemesterPlanWinter2024(8.5x14)1.docx")
+def insertToTable(listOne, outputFilePath):
+    # Open the Word document file provided by client.
+    doc = Document(r"static/schedule.docx")
 
     # Get the first table in the document.
     table = doc.tables[0]
@@ -139,5 +139,5 @@ def insertTable(listOne):
         cell.text = listOne[i]
 
     # Save the modified document to a new file.
-    doc.save(r'C:\Users\wilso\Desktop\modified_document.docx')
+    doc.save(outputFilePath)
 

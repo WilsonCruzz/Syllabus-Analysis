@@ -28,9 +28,9 @@ gradesList = ['1%', '2%', '3%', '4%', '5%', '6%', '7%', '8%', '9%', '10%',
 
 
 assignmentsList = [
-    "assignment", "homework ", "assignment 1", "assignment 2", "assignment 3", "assignment 4",
+    "assignment", "homework ", "assignment 1", "assignment 2", "assignment 3", "assignment 4", "assignment 5",
     "project ", "task ", "exercise ",
-    "problem set ", "report "
+    "problem set ", "report ", "lab "
 ]
 
 examsList = [
