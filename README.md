@@ -14,7 +14,7 @@ Welcome to the Syllabus-Analysis project! This program is designed to analyze Mi
 
 ## Requirements
 
-- Python 3.x
+- Python 3.12
 - tkinter
 - python-docx
 
