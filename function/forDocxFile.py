@@ -18,6 +18,7 @@ It returns a nested list sorted by week, with a length of 15.
 return[['Week 1',' '], ['Week 2',' ']....['Week 15',' ']]
 '''
 def weekFinder(row):
+    # Initialize an empty list to store related text in the current row.
     allRelatedText = []
     # Iterate through each cell in the row.
     for cell in row.cells:
@@ -34,6 +35,7 @@ def weekFinder(row):
             # Append the relatedText list of the current row to the allRelatedText list.
             allRelatedText.append(relatedText)
 
+    # Return the list containing related text from the current row.
     return allRelatedText
 
 def tableInfoExtract(docxFilePath):
@@ -43,12 +45,8 @@ def tableInfoExtract(docxFilePath):
     # Initialize an empty list to store all related text.
     allRelatedText = []
 
-    # Iterate through each table in the document.
-    for table in doc.tables:
-        # Iterate through each row in the table.
-        for row in table.rows:
-            # Call the weekFinder function to get related text from the current row.
-            allRelatedText += weekFinder(row)
+    # Use list comprehension to collect all related text.
+    allRelatedText += [listOne for table in doc.tables for row in table.rows for listOne in weekFinder(row)]
 
     # Return the list containing related text from all rows.
     return allRelatedText
@@ -58,17 +56,13 @@ def dupCheck(listOne):
     # Initialize an empty list to store unique sublists.
     noDupList = []
 
-    # Iterate through each sublist in the input list.
-    for sublist in listOne:
-        # Check if the sublist is not already in the noDupList.
-        if sublist not in noDupList:
-            # If not, append it to the noDupList.
-            noDupList.append(sublist)
+    # Use list comprehension to remove duplicates from the input list.
+    noDupList += [sublist for sublist in listOne if sublist not in noDupList]
 
-        # Check if the first sublist's first element is not 'week 1' (case insensitive).
-        if noDupList and noDupList[0][0].lower() != 'week 1':
-            # If it's not 'week 1', remove the first sublist from the noDupList.
-            noDupList.remove(noDupList[0])
+    # Check if the first sublist's first element is not 'week 1' (case insensitive).
+    if noDupList and noDupList[0][0].lower() != 'week 1':
+        # If it's not 'week 1', remove the first sublist from the noDupList.
+        noDupList.remove(noDupList[0])
 
     # Return the list with duplicates removed and only the first sublist being 'week 1'.
     return noDupList
@@ -117,11 +111,8 @@ def targetWordsChecker(listOne):
 def concatList(listOne):
     # Initialize an empty list to store concatenated strings.
     result = []
-
-    # Iterate through each sublist in the input list.
-    for i in range(len(listOne)):
-        # Join the elements of the current sublist into a single string and append to result.
-        result.append(''.join(listOne[i]))
+    # Use list comprehension to concatenate the strings in each sublist.
+    result += [''.join(listOne[i]) for i in range(len(listOne))]
 
     # Return the list containing concatenated strings.
     return result
@@ -132,7 +123,7 @@ Inserting a list of length fifteen into the second column of a table, starting f
 in a docx file, and saving it as a new file.
 '''
 
-def insertToTable(listOne, outputFilePath):
+def insertIntoTable(listOne, outputFilePath):
     # Open the Word document file provided by client.
     doc = Document(r"static/schedule.docx")
 
