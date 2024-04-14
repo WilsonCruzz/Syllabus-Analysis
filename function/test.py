@@ -1,6 +1,6 @@
 import PyPDF2
 import re
-from data import targetList
+from constants import targetList
 
 
 def weekFinder(filePath):
