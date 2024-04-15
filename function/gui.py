@@ -76,7 +76,7 @@ def processDocxFile(docxFilePath, outputPath, column, filePath):
     functionsList = [forDocxFile.weekFinder, forDocxFile.dupCheck,
                      forDocxFile.targetWordsChecker, forDocxFile.concatList,
                      # ref.https://www.w3schools.com/python/python_lambda.asp
-                     lambda x: forDocxFile.insertToTable(x, outputPath, column, filePath)]
+                     lambda x: forDocxFile.insertIntoTable(x, outputPath, column, filePath)]
 
     # Apply the functions to the input data
     for function in functionsList:
