@@ -40,3 +40,4 @@ Welcome to the Syllabus-Analysis project! This program is designed to analyze Mi
 ## Contributors
 
 - [Chun-Wei Wang](https://github.com/WilsonCruzz)
+- [Sebastian Bruce](https://github.com/SebastianBruce)
