@@ -1,5 +1,6 @@
 from docx import Document
 from constants import targetList
+import os
 
 '''
 Step1: 
@@ -123,17 +124,28 @@ Inserting a list of length fifteen into the second column of a table, starting f
 in a docx file, and saving it as a new file.
 '''
 
-def insertIntoTable(listOne, outputFilePath):
-    # Open the Word document file provided by client.
-    doc = Document(r"static/schedule.docx")
+def insertIntoTable(listOne, outputFilePath, column, filePath):
+
+    # For the first file use the template
+    if column == 1:
+        # Open the Word document file provided by client.
+        doc = Document(r"static/schedule.docx")
+
+    # For every other file use the created word file
+    else:
+        # Open the Word document created
+        doc = Document(outputFilePath)
 
     # Get the first table in the document.
     table = doc.tables[0]
 
+    # Include program name (syllabus file name) in the first row
+    table.cell(0, column).text = os.path.basename(filePath)
+
     # Iterate through each element in the input list.
     for i in range(len(listOne)):
-        # Get the cell in the first column and i+1 row of the table.
-        cell = table.cell(i + 1, 1)
+        # Get the cell in the column based off the file and i+1 row of the table.
+        cell = table.cell(i + 1, column)
 
         # Set the text of the cell to the corresponding element in the input list.
         cell.text = listOne[i]

@@ -1,6 +1,7 @@
 import tkinter as tk
-from tkinter import filedialog
-from function import forDocxFile
+from tkinter import filedialog, ttk
+from function import forDocxFile, PDFConvert
+import time
 
 
 """Create and configure the GUI."""
@@ -9,9 +10,7 @@ def createGui():
     root = tk.Tk()
     # Set the title, size, and resizability of the window
     root.title("Syllabus-Analysis")
-    # Set the title, size, and resizability of the window
     root.minsize(600, 600)
-    # Set the title, size, and resizability of the window
     root.resizable(True, True)
 
     # Add the background image, greeting message, content message, and instruction message to the GUI
@@ -20,9 +19,12 @@ def createGui():
     addContentMessage(root)
     addInstructionMessage(root)
 
-    # Return the root window
-    return root
+    # Create a progress bar
+    progress_bar = ttk.Progressbar(root, orient="horizontal", length=300, mode="determinate")
+    progress_bar.pack(pady=10)
 
+    # Return the root window and progress bar
+    return root, progress_bar
 
 """Add a background image to the GUI."""
 def addBackgroundImage(root):
@@ -61,27 +63,64 @@ def addInstructionMessage(root):
 
 
 """Process a DOCX file and return the result."""
-def processDocxFile(docxFilePath):
+def processDocxFile(docxFilePath, outputPath, column, filePath):
+
+    # If the user selects a PDF file, convert it to a docx file
+    if docxFilePath.lower().endswith('.pdf'):
+        docxFilePath = PDFConvert.convertToDocx(docxFilePath)
+    
     # Set the input path for the DOCX file
     inputData = docxFilePath
-    # Set the output path for the processed file
-    outputPath = filedialog.asksaveasfilename(defaultextension=".docx")
+
     # Set the list of functions to be applied to the input data
-    functionsList = [forDocxFile.tableInfoExtract, forDocxFile.dupCheck,
+    functionsList = [forDocxFile.weekFinder, forDocxFile.dupCheck,
                      forDocxFile.targetWordsChecker, forDocxFile.concatList,
                      # ref.https://www.w3schools.com/python/python_lambda.asp
-                     lambda x: forDocxFile.insertIntoTable(x, outputPath)]
+                     lambda x: forDocxFile.insertToTable(x, outputPath, column, filePath)]
 
     # Apply the functions to the input data
     for function in functionsList:
         # Update the input data with the result of the current function
         inputData = function(inputData)
 
+    # Convert the generated schedule to a PDF
+    PDFConvert.convertToPdf(outputPath)
+
     # Return the result of the last function
     return inputData
 
 
 """Open a file dialog and return the selected file path."""
-def selectFile():
-    # Open a file dialog to select a file
-    return filedialog.askopenfilename()
+def selectFiles():
+    # Open a file dialog to select multiple files
+    return filedialog.askopenfilenames()
+
+"""Process multiple files."""
+def processMultipleFiles(filePaths, progress_bar):
+
+    # Declare column variable to be changed for each file
+    column = 0
+
+    # Determine how many files were uploaded
+    total_files = len(filePaths)
+
+    # Set the output path for the processed file
+    outputPath = filedialog.asksaveasfilename(defaultextension=".docx")
+
+    # Iterate over each selected file path
+    for idx, filePath in enumerate(filePaths, 1):
+
+        # Increment column count so that each files contents is written to a separate one
+        column += 1
+
+        # Process each file
+        processDocxFile(filePath, outputPath, column, filePath)
+
+        # Update progress bar value based on the current file index
+        progress_value = (idx / total_files) * 100
+        progress_bar["value"] = progress_value
+        # Update the GUI to reflect the changes
+        progress_bar.update()
+
+    # Reset progress bar after processing all files
+    progress_bar["value"] = 0
