@@ -17,6 +17,8 @@ Welcome to the Syllabus-Analysis project! This program is designed to analyze Mi
 - Python 3.12
 - tkinter
 - python-docx
+- comtypes
+- pdf2docx
 
 ## Usage
 
@@ -24,7 +26,7 @@ Welcome to the Syllabus-Analysis project! This program is designed to analyze Mi
 2. Ensure you have Python installed.
 3. Install the required dependencies using pip:
     ```
-    pip install tkinter python-docx
+    pip install tk python-docx comtypes pdf2docx
     ```
 4. Run the program:
     ```

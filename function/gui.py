@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog, ttk
 from function import forDocxFile, PDFConvert
-import time
 
 
 """Create and configure the GUI."""
@@ -82,7 +81,6 @@ def processDocxFile(docxFilePath, outputPath, column, filePath):
     for function in functionsList:
         # Update the input data with the result of the current function
         inputData = function(inputData)
-
     # Convert the generated schedule to a PDF
     PDFConvert.convertToPdf(outputPath)
 

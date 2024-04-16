@@ -29,14 +29,14 @@ gradesList = ['1%', '2%', '3%', '4%', '5%', '6%', '7%', '8%', '9%', '10%',
 
 assignmentsList = [
     "assignment", "homework ", "assignment 1", "assignment 2", "assignment 3", "assignment 4", "assignment 5",
-    "project ", "task ", "exercise ",
-    "problem set ", "report ", "lab "
+    "project", "task ", "exercise ",
+    "problem set ", "report ", "lab ", 
 ]
 
 examsList = [
     "exam", "quiz",
     "test", "mid-term",
-    "final", "assessment", 'test 1', 'test 2', 'test 3',
+    'test 1', 'test 2', 'test 3',
     'test 4', 'test 5'
 ]
 '''

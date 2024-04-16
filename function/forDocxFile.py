@@ -1,6 +1,6 @@
 from docx import Document
 from constants import targetList
-import os
+import os, re
 
 '''
 Step1: 
@@ -22,26 +22,49 @@ def weekFinder(docxFilePath):
 
     # Initialize an empty list to store all related text.
     allRelatedText = []
+    rowAmounts = []
+
+    # Initialize table variable to be tracked
+    tables = 0
+
+    # Store a regex pattern to search specifically for the word "week"
+    # We use regex so that it wont pick up "weekly" (or anything else with week in it) but will still pick up the word "weeK" even if theres no spaces
+    pattern = r'\bweek\b'
 
     # Iterate through each table in the document.
     for table in doc.tables:
-        # Iterate through each row in the table.
-        for row in table.rows:
-            # Iterate through each cell in the row.
-            for cell in row.cells:
-                # Check if the text in the cell contains 'week' (case insensitive).
-                if 'week' in cell.text.lower():
-                    # Initialize an empty list to store related text in the current row.
-                    relatedText = []
 
-                    # Iterate through each cell in the row again to collect related text.
-                    for cellInRow in row.cells:
-                        # Append the stripped text of each cell to the relatedText list.
-                        relatedText.append(cellInRow.text.strip())
+        # Store the first cell in the table
+        firstCell = table.cell(0, 0).text.strip().lower()
 
-                    # Append the relatedText list of the current row to the allRelatedText list.
-                    allRelatedText.append(relatedText)
+        # Store row amount for later comparison
+        rowAmounts.append(len(table.rows))
 
+        # This will run if the first cell contains "week" or "module" or if tables = 1 (meaning that we've already gone through one table)
+        # We check the tables as sometimes the weekly table will be split across pages causing it to be multiple tables
+        # We check the row amounts to make sure its the same table extended as some syllabus' have special cases that require extra checks
+        # So by checking if tables = 1 and the row amounts are the same we ensure that we've grabbed the data from one page and now grab the rest from the other
+        if (re.search(pattern, firstCell) or "module" in firstCell) or (tables == 1 and all(element == rowAmounts[0] for element in rowAmounts)):
+
+            # Increment tables
+            tables += 1
+
+            # Iterate through each row in tables
+            for row in table.rows:
+                # Initialize an empty list to store related text in the current row.
+                relatedText = []
+                
+                # Iterate through each cell in the row to collect related text.
+                for cellInRow in row.cells:
+                    # Append the stripped text of each cell to the relatedText list.
+                    relatedText.append(cellInRow.text.strip())
+
+                # Append the relatedText list of the current row to the allRelatedText list.
+                allRelatedText.append(relatedText)
+
+        # If the table is not the timetable, remove its row amount
+        else:
+            rowAmounts.pop(-1)
     # Return the list containing related text from all rows.
     return allRelatedText
 
@@ -52,15 +75,14 @@ def dupCheck(listOne):
 
     # Iterate through each sublist in the input list.
     for sublist in listOne:
+
         # Check if the sublist is not already in the noDupList.
         if sublist not in noDupList:
             # If not, append it to the noDupList.
             noDupList.append(sublist)
 
-        # Check if the first sublist's first element is not 'week 1' (case insensitive).
-        if noDupList and noDupList[0][0].lower() != 'week 1':
-            # If it's not 'week 1', remove the first sublist from the noDupList.
-            noDupList.remove(noDupList[0])
+    # Delete the first sublist as it is column headers and useless to us
+    noDupList.remove(noDupList[0])
 
     # Return the list with duplicates removed and only the first sublist being 'week 1'.
     return noDupList
@@ -144,7 +166,11 @@ def insertToTable(listOne, outputFilePath, column, filePath):
     # Iterate through each element in the input list.
     for i in range(len(listOne)):
         # Get the cell in the column based off the file and i+1 row of the table.
-        cell = table.cell(i + 1, column)
+
+        # If the table pulled from has more than 15 rows, dont run the rest as it will overflow the schedule table
+        # (No syllabus should have more than 15 unless it's by mistake)
+        if i + 1 <= 15:
+            cell = table.cell(i + 1, column)
 
         # Set the text of the cell to the corresponding element in the input list.
         cell.text = listOne[i]
