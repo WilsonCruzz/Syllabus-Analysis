@@ -22,7 +22,7 @@ def weekFinder(docxFilePath):
 
     # Initialize an empty list to store all related text.
     allRelatedText = []
-    rowAmounts = []
+    columnAmounts = []
 
     # Initialize table variable to be tracked
     tables = 0
@@ -37,14 +37,14 @@ def weekFinder(docxFilePath):
         # Store the first cell in the table
         firstCell = table.cell(0, 0).text.strip().lower()
 
-        # Store row amount for later comparison
-        rowAmounts.append(len(table.rows))
+        # Store columns amount for later comparison
+        columnAmounts.append(len(table.columns))
 
         # This will run if the first cell contains "week" or "module" or if tables = 1 (meaning that we've already gone through one table)
         # We check the tables as sometimes the weekly table will be split across pages causing it to be multiple tables
-        # We check the row amounts to make sure its the same table extended as some syllabus' have special cases that require extra checks
-        # So by checking if tables = 1 and the row amounts are the same we ensure that we've grabbed the data from one page and now grab the rest from the other
-        if (re.search(pattern, firstCell) or "module" in firstCell) or (tables == 1 and all(element == rowAmounts[0] for element in rowAmounts)):
+        # We check the column amounts to make sure its the same table extended as some syllabus' have special cases that require extra checks
+        # So by checking if tables = 1 and the column amounts are the same we ensure that we've grabbed the data from one page and now grab the rest from the other
+        if (re.search(pattern, firstCell) or "module" in firstCell) or (tables == 1 and all(element == columnAmounts[0] for element in columnAmounts)):
 
             # Increment tables
             tables += 1
@@ -64,7 +64,8 @@ def weekFinder(docxFilePath):
 
         # If the table is not the timetable, remove its row amount
         else:
-            rowAmounts.pop(-1)
+            columnAmounts.pop(-1)
+            
     # Return the list containing related text from all rows.
     return allRelatedText
 
@@ -81,8 +82,10 @@ def dupCheck(listOne):
             # If not, append it to the noDupList.
             noDupList.append(sublist)
 
-    # Delete the first sublist as it is column headers and useless to us
-    noDupList.remove(noDupList[0])
+    # If list is not empty (information found)
+    if len(noDupList) > 0:
+        # Delete the first sublist as it is column headers and useless to us
+        noDupList.remove(noDupList[0])
 
     # Return the list with duplicates removed and only the first sublist being 'week 1'.
     return noDupList
