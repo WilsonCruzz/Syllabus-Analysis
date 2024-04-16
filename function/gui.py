@@ -1,6 +1,7 @@
 import tkinter as tk
-from tkinter import filedialog, ttk
+from tkinter import filedialog, ttk, messagebox
 from function import forDocxFile, PDFConvert
+import os
 
 
 """Create and configure the GUI."""
@@ -19,11 +20,11 @@ def createGui():
     addInstructionMessage(root)
 
     # Create a progress bar
-    progress_bar = ttk.Progressbar(root, orient="horizontal", length=300, mode="determinate")
-    progress_bar.pack(pady=10)
+    progressBar = ttk.Progressbar(root, orient="horizontal", length=300, mode="determinate")
+    progressBar.pack(pady=10)
 
     # Return the root window and progress bar
-    return root, progress_bar
+    return root, progressBar
 
 """Add a background image to the GUI."""
 def addBackgroundImage(root):
@@ -46,7 +47,7 @@ def addGreetingMessage(root):
 """Add a content message to the GUI."""
 def addContentMessage(root):
     # Create a label to display the content message
-    content = tk.Label(root, text="This program analyzes Microsoft Word syllabus files\n "
+    content = tk.Label(root, text="This program analyzes class syllabus files\n "
                                   "and generates weekly schedules for students.", font=("Arial", 16))
     # Set the position of the label
     content.pack(pady=15)
@@ -56,7 +57,8 @@ def addContentMessage(root):
 def addInstructionMessage(root):
     # Create a label to display the instruction message
     instruction = tk.Label(root, text="Please click the button below to select "
-                                      "the Word file for analysis.", font=("Arial", 14))
+                                      "word or pdf files for analysis,\n" 
+                                      "then select a directory for output.", font=("Arial", 14))
     # Set the position of the label
     instruction.pack(pady=20)
 
@@ -94,13 +96,13 @@ def selectFiles():
     return filedialog.askopenfilenames()
 
 """Process multiple files."""
-def processMultipleFiles(filePaths, progress_bar):
+def processFiles(filePaths, progressBar):
 
     # Declare column variable to be changed for each file
     column = 0
 
     # Determine how many files were uploaded
-    total_files = len(filePaths)
+    totalFiles = len(filePaths)
 
     # Set the output path for the processed file
     outputPath = filedialog.asksaveasfilename(defaultextension=".docx")
@@ -115,10 +117,18 @@ def processMultipleFiles(filePaths, progress_bar):
         processDocxFile(filePath, outputPath, column, filePath)
 
         # Update progress bar value based on the current file index
-        progress_value = (idx / total_files) * 100
-        progress_bar["value"] = progress_value
+        progressValue = (idx / totalFiles) * 100
+        progressBar["value"] = progressValue
         # Update the GUI to reflect the changes
-        progress_bar.update()
+        progressBar.update()
+
+    # Open the file for the user if they have word installed and a license to use it
+    try:
+        os.startfile(outputPath)
+
+    # If not open a window displaying the error
+    except FileNotFoundError:
+        messagebox.showerror("Error", "Failed to open the file. It appears you don't have Microsoft Word installed or don't have a license to use it. Consider installing a compatible application to open .docx files, or try opening the file with a different program.")
 
     # Reset progress bar after processing all files
-    progress_bar["value"] = 0
+    #progressBar["value"] = 0

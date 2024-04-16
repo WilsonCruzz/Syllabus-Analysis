@@ -84,7 +84,6 @@ def dupCheck(listOne):
             if not all(string == "" for string in sublist):
                 # If not, append it to the noDupList.
                 noDupList.append(sublist)
-                print(sublist)
 
     # If list is not empty (information found)
     if len(noDupList) > 0:
@@ -181,7 +180,6 @@ def insertToTable(listOne, outputFilePath, column, filePath):
 
         # Set the text of the cell to the corresponding element in the input list.
         cell.text = listOne[i]
-        print(f"{i + 1}, {column} {cell.text}")
 
     # Save the modified document to a new file.
     doc.save(outputFilePath)
