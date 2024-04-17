@@ -83,9 +83,6 @@ def processDocxFile(docxFilePath, outputPath, column, filePath):
     for function in functionsList:
         # Update the input data with the result of the current function
         inputData = function(inputData)
-    # Convert the generated schedule to a PDF
-    PDFConvert.convertToPdf(outputPath)
-
     # Return the result of the last function
     return inputData
 
@@ -129,6 +126,3 @@ def processFiles(filePaths, progressBar):
     # If not open a window displaying the error
     except FileNotFoundError:
         messagebox.showerror("Error", "Failed to open the file. It appears you don't have Microsoft Word installed or don't have a license to use it. Consider installing a compatible application to open .docx files, or try opening the file with a different program.")
-
-    # Reset progress bar after processing all files
-    #progressBar["value"] = 0
