@@ -41,7 +41,7 @@ def addGreetingMessage(root):
     # Create a label to display the greeting message
     greeting = tk.Label(root, text="Welcome to Syllabus-Analysis.", font=("Arial", 22))
     # Set the position of the label
-    greeting.pack(pady=25)
+    greeting.pack(pady=15)
 
 
 """Add a content message to the GUI."""
@@ -50,7 +50,7 @@ def addContentMessage(root):
     content = tk.Label(root, text="This program analyzes class syllabus files\n "
                                   "and generates weekly schedules for students.", font=("Arial", 16))
     # Set the position of the label
-    content.pack(pady=15)
+    content.pack(pady=20)
 
 
 """Add an instruction message to the GUI."""
@@ -60,7 +60,7 @@ def addInstructionMessage(root):
                                       "word or pdf files for analysis,\n" 
                                       "then select a directory for output.", font=("Arial", 14))
     # Set the position of the label
-    instruction.pack(pady=20)
+    instruction.pack(pady=15)
 
 
 """Process a DOCX file and return the result."""
