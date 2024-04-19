@@ -1,7 +1,0 @@
-# ignore pdf.py and test.py in the function directory
-function/pdf.py
-function/test.py
-# ignore all pyc files
-*pyc
-# ignore all pycache directories
-__pycache__/
