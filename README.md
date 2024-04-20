@@ -2,15 +2,15 @@
 
 ## Introduction
 
-Welcome to the Syllabus-Analysis project! This program is designed to analyze Microsoft Word syllabus files and generate weekly schedules for students. It aims to simplify the process of organizing syllabus information into actionable plans.
+Welcome to the Syllabus-Analysis project! This program is designed to analyze Microsoft Word and PDF syllabus files, empowering users to efficiently organize syllabus information into actionable plans. Version 1.1 introduces new features and enhancements, making syllabus analysis and schedule generation even more convenient.
 
 ## Features
 
-- **File Analysis:** Analyze Microsoft Word syllabus files.
-- **Weekly Schedule Generation:** Generate weekly schedules for students based on syllabus information.
-- **Keyword Extraction:** Extract relevant keywords from syllabus content to facilitate analysis.
-- **Duplicate Removal:** Remove duplicate entries to ensure data integrity.
-- **Table Insertion:** Insert generated schedules into a Word document for easy viewing and sharing.
+- **File Analysis:** Analyze both Microsoft Word and PDF syllabus files.
+- **Batch Processing:** Process multiple files simultaneously, streamlining the analysis workflow.
+- **Personalized Schedule Generation:** Create personalized weekly schedules for students based on syllabus information.
+- **Standalone Executable:** Easily access the program through a standalone executable file for seamless usage.
+- **Enhanced User Interface:** Enjoy a user-friendly interface for improved navigation and interaction.
 
 ## Requirements
 
