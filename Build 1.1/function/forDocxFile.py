@@ -1,4 +1,5 @@
 from docx import Document
+from docx.enum.section import WD_ORIENTATION
 from constants import targetList
 import os, re
 
@@ -12,7 +13,6 @@ The second function removes duplicate lists and ensures that the first sublist b
 It returns a nested list sorted by week, with a length of 15.
 return[['Week 1',' '], ['Week 2',' ']]
 '''
-
 
 def weekFinder(docxFilePath):
     # Open the specified Word document file.
@@ -127,6 +127,14 @@ Inserting a list of length fifteen into the second column of a table, starting f
 in a docx file, and saving it as a new file.
 '''
 
+# Change the file from portrait to landscape if needed
+def setLandscape(doc):
+    section = doc.sections[0]
+    if section.orientation != WD_ORIENTATION.LANDSCAPE:
+        section.orientation = WD_ORIENTATION.LANDSCAPE
+        newWidth, newHeight = section.page_height, section.page_width
+        section.page_width = newWidth
+        section.page_height = newHeight
 
 def insertToTable(listOne, outputFilePath, column, filePath):
     # For the first file use the template
@@ -137,6 +145,8 @@ def insertToTable(listOne, outputFilePath, column, filePath):
     else:
         # Open the Word document created
         doc = Document(outputFilePath)
+    # Make the file landscape orientation
+    setLandscape(doc)
     # Get the first table in the document.
     table = doc.tables[0]
     # Include program name (syllabus file name) in the first row

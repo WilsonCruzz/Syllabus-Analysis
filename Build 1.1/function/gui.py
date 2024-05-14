@@ -15,6 +15,8 @@ def createGui():
 
     # Add the background image, greeting message, content message, and instruction message to the GUI
     addBackgroundImage(root)
+    textLabel = tk.Label(root, text="Created by: Sebastian Bruce & Chun-Wei Wang", font=("Arial", 10, "bold"))
+    textLabel.pack(pady=10)
     addGreetingMessage(root)
     addContentMessage(root)
     addInstructionMessage(root)
@@ -41,16 +43,16 @@ def addGreetingMessage(root):
     # Create a label to display the greeting message
     greeting = tk.Label(root, text="Welcome to Syllabus-Analysis.", font=("Arial", 22))
     # Set the position of the label
-    greeting.pack(pady=15)
+    greeting.pack(pady=0)
 
 
 """Add a content message to the GUI."""
 def addContentMessage(root):
     # Create a label to display the content message
     content = tk.Label(root, text="This program analyzes class syllabus files\n "
-                                  "and generates weekly schedules for students.", font=("Arial", 16))
+                                  "and generates week-by-week schedules for students.", font=("Arial", 16))
     # Set the position of the label
-    content.pack(pady=20)
+    content.pack(pady=15)
 
 
 """Add an instruction message to the GUI."""
@@ -60,7 +62,11 @@ def addInstructionMessage(root):
                                       "word or pdf files for analysis,\n" 
                                       "then select a directory for output.", font=("Arial", 14))
     # Set the position of the label
-    instruction.pack(pady=15)
+    instruction.pack(pady=0)
+
+    # Create disclaimer
+    textLabel = tk.Label(root, text=r"*100% accuracy cannot be guaranteed, be sure to double check results*", font=("Arial", 10, "bold"))
+    textLabel.pack(pady=10)
 
 
 """Process a DOCX file and return the result."""
