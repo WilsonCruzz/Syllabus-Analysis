@@ -2,21 +2,45 @@ import tkinter as tk
 from tkinter import filedialog, ttk, messagebox
 from function import forDocxFile, PDFConvert
 import os
+import webbrowser
 
+def openLinkedinSebastian(event):
+    webbrowser.open('https://www.linkedin.com/in/sebastian-bruce/')
 
+def openLinkedinChunwei(event):
+    webbrowser.open('https://www.linkedin.com/in/chun-wei-wang-9ab9981a2/')
 """Create and configure the GUI."""
 def createGui():
     # Create the root window
     root = tk.Tk()
     # Set the title, size, and resizability of the window
     root.title("Syllabus-Analysis")
-    root.minsize(600, 600)
+    root.minsize(650, 650)
     root.resizable(True, True)
 
     # Add the background image, greeting message, content message, and instruction message to the GUI
     addBackgroundImage(root)
-    textLabel = tk.Label(root, text="Created by: Sebastian Bruce & Chun-Wei Wang", font=("Arial", 10, "bold"))
-    textLabel.pack(pady=10)
+
+    # Create a frame to hold the labels
+    frame = tk.Frame(root)
+    frame.pack(pady=10)
+    # Create a label to display the creators of the program
+    textLabel = tk.Label(frame, text="Created by: ", font=("Arial", 10, "bold"))
+    textLabel.grid(row=0, column=0)
+    # Create a label to display the names
+    sebastianLabel = tk.Label(frame, text="Sebastian Bruce", font=("Arial", 10, "underline"), fg="blue",
+                              cursor="hand2")
+    sebastianLabel.bind("<Button-1>", openLinkedinSebastian)
+    sebastianLabel.grid(row=0, column=1)
+    # Create a label to display the word "and"
+    andLabel = tk.Label(frame, text=" & ", font=("Arial", 10, "bold"))
+    andLabel.grid(row=0, column=2)
+    # Create a label to display the names
+    chunweiLabel = tk.Label(frame, text="Chun-Wei Wang", font=("Arial", 10, "underline"), fg="blue",
+                            cursor="hand2")
+    chunweiLabel.bind("<Button-1>", openLinkedinChunwei)
+    chunweiLabel.grid(row=0, column=3)
+
     addGreetingMessage(root)
     addContentMessage(root)
     addInstructionMessage(root)

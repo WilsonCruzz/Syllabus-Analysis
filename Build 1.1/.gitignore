@@ -5,3 +5,4 @@ function/test.py
 *pyc
 # ignore all pycache directories
 __pycache__/
+*.xml
