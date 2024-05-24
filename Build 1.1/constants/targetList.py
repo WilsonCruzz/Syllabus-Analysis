@@ -36,7 +36,7 @@ assignmentsList = [
     "draft research project", "linkedin post", "thesis and outline", "presentation assigned"
     "problem set", "report", "lab", "giving feedback (presentation)", "final research project",
     "final course reflection", "introduction",
-]+[f'assignment {i}' for i in range(1, 20)]+[f'lab {i}' for i in range(1, 20)]+[f'Lab {i}' for i in range(1, 20)]
+]+[f'assignment {i}' for i in range(1, 20)]+[f'lab {i}' for i in range(1, 20)]
 
 examsList = [
     "exam", "quiz", "midterm quiz",
