@@ -8,6 +8,7 @@ The targetList is a list that combines several other lists. These lists include:
 
 The targetList is used to filter words in a document. Any word that matches an item in the targetList is considered a "target word". These target words are used for further processing, such as generating a weekly schedule for students.
 """
+
 dueDateList = [
     "deadline ", "hand in ",
     "submission ", "turn in",
@@ -28,17 +29,19 @@ gradesList = ['1%', '2%', '3%', '4%', '5%', '6%', '7%', '8%', '9%', '10%',
 
 
 assignmentsList = [
-    "assignment", "homework ", "assignment 1", "assignment 2", "assignment 3", "assignment 4", "assignment 5",
-    "project", "task ", "exercise ",
-    "problem set ", "report ", "lab ", 
-]
+    "assignment", "homework",
+    "project", "task", "exercise", "introduction email", "structured topic paragraph", "research project",
+    "research skills quiz", "evaluating sources", "plagiarism quiz", "apa references (research project)",
+    "draft thesis and outline", "thesis and outline (research project)", "apa reference list",
+    "draft research project", "linkedin post", "thesis and outline", "presentation assigned"
+    "problem set", "report", "lab", "giving feedback (presentation)", "final research project",
+    "final course reflection", "introduction",
+]+[f'assignment {i}' for i in range(1, 20)]+[f'lab {i}' for i in range(1, 20)]+[f'Lab {i}' for i in range(1, 20)]
 
 examsList = [
-    "exam", "quiz",
+    "exam", "quiz", "midterm quiz",
     "test", "mid-term",
-    'test 1', 'test 2', 'test 3',
-    'test 4', 'test 5'
-]
+] + [f'test {i}' for i in range(1, 20)]
 '''
 weekList
 '''

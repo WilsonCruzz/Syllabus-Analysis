@@ -101,7 +101,7 @@ def targetWordsChecker(listOne):
             # Split the current word into a list of words.
             words = listOne[i][j].split()
             # Filter out words that are not in the targetList.
-            modifiedWords = [word for word in words if word.lower() in targetList.targetList]
+            modifiedWords = [word for word in words if word.strip().lower() in targetList.targetList]
             # Join the modified words back into a string and append to the modifiedSublist.
             modifiedSublist.append(' '.join(modifiedWords))
         # Append the modifiedSublist to the newList.
