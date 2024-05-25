@@ -18,26 +18,26 @@ dueDateList = [
 
 gradesList = [f'{i}%' for i in range(1, 101)]+[f'({i}%)' for i in range(1, 101)]
 
+labGradeList = [f'lab {i} ({j}%)' for i in range(1, 20) for j in range(1, 101)]
+assignmentGradeList = [f'assignment {i} ({j}%)' for i in range(1, 20) for j in range(1, 101)]
 
 assignmentsList = [
-    "assignment", "homework",
+    "homework",
     "project", "task", "exercise", "introduction email", "structured topic paragraph", "research project",
     "research skills quiz", "evaluating sources", "plagiarism quiz", "apa references (research project)",
     "draft thesis and outline", "thesis and outline (research project)", "apa reference list",
     "draft research project", "linkedin post", "thesis and outline", "presentation assigned"
-    "problem set", "report", "lab", "giving feedback (presentation)", "final research project",
+    "problem set", "report", "giving feedback (presentation)", "final research project",
     "final course reflection", "introduction",
 ]+[f'assignment {i}' for i in range(1, 20)]+[f'lab {i}' for i in range(1, 20)]
 
 examsList = [
     "exam", "quiz", "midterm quiz",
-    "test", "mid-term",
+    "test", "mid-term", 'mid-semester test'
 ] + [f'test {i}' for i in range(1, 20)]
 '''
 weekList
 '''
-weekList = ['week 1', 'week 2', 'week 3', 'week 4', 'week 5',
-            'week 6', 'week 7', 'week 8', 'week 9', 'week 10',
-            'week 11', 'week 12', 'week 13', 'week 14', 'week 15', 'study week']
+weekList = ['study week'] + [f'week {i}' for i in range(1, 20)]
 
-targetList = dueDateList + gradesList + assignmentsList + examsList
+targetList = dueDateList + gradesList + assignmentsList + examsList + assignmentGradeList + labGradeList
