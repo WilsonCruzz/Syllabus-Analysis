@@ -24,7 +24,7 @@ def weekFinder(docxFilePath):
     tables = 0
     # Store a regex pattern to search specifically for the word "week"
     # We use regex so that it wont pick up "weekly" (or anything else with week in it) but will still pick up the word "weeK" even if theres no spaces
-    pattern = r'\bweek'
+    pattern = r'\bweek\b'
     # Iterate through each table in the document.
     for table in doc.tables:
         # Store the first cell in the table
@@ -50,7 +50,6 @@ def weekFinder(docxFilePath):
                     relatedText.append(cellInRow.text.strip())
                 # Append the relatedText list of the current row to the allRelatedText list.
                 allRelatedText.append(relatedText)
-                print(allRelatedText)
         # If the table is not the timetable, remove its row amount
         else:
             columnAmounts.pop(-1)
@@ -93,8 +92,6 @@ Ultimately, it returns a single list with a length of 15.
 def targetWordsChecker(listOne):
     # Initialize an empty list to store the modified sublists.
     newList = []
-    # Create a regular expression pattern that matches any word in the targetList.
-    pattern = re.compile(r'\b(?:' + '|'.join(map(re.escape, targetList.targetList)) + r')', re.IGNORECASE)
     # Iterate through each sublist in the input list.
     for i in range(len(listOne)):
         # Initialize an empty list to store modified words in the current sublist.
@@ -102,16 +99,11 @@ def targetWordsChecker(listOne):
         # Iterate through each word in the current sublist.
         for j in range(len(listOne[i])):
             # Split the current word into a list of words.
-            #words = listOne[i][j].split()
+            words = listOne[i][j].split()
             # Filter out words that are not in the targetList.
-            #modifiedWords = [word for word in words if word.strip().lower() in targetList.targetList]
+            modifiedWords = [word for word in words if word.lower() in targetList.targetList]
             # Join the modified words back into a string and append to the modifiedSublist.
-            #modifiedSublist.append(' '.join(modifiedWords))
-            # Find all occurrences of the pattern in the current word.
-            matches = pattern.findall(listOne[i][j])
-            # Append the matches to the modifiedSublist.
-            modifiedSublist.extend(matches)
-            print(modifiedSublist)
+            modifiedSublist.append(' '.join(modifiedWords))
         # Append the modifiedSublist to the newList.
         newList.append(modifiedSublist)
     # Return the newList containing modified sublists.
