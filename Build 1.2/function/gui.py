@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog, ttk, messagebox
-from function import forDocxFile, PDFConvert
+from function import PDFConvert, forDocxFile
 import os
 import webbrowser
 
