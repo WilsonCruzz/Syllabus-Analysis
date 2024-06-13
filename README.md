@@ -35,9 +35,6 @@ Welcome to the Syllabus-Analysis project! This program is designed to analyze Mi
 5. Click the button to select the Word file for analysis.
 6. View the generated weekly schedules.
 
-## Example
-
-![Example](Build%201.1/static/example.png)
 
 ## Contributors
 
